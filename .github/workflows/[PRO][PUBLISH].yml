@@ -8,7 +8,7 @@ on:
       - '.github/**'
 
 env:
-  APP_NAME: "FlappyBird"
+  APP_NAME: "Asteroids"
     
 jobs:
   

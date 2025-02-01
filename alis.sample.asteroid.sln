@@ -12,6 +12,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".Config", ".Config", "{D4B6
 		funding.yml = funding.yml
 		readme.md = readme.md
 		license.md = license.md
+		CHANGELOG.md = CHANGELOG.md
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alis.Sample.Asteroid", "alis.sample.asteroid\Alis.Sample.Asteroid.csproj", "{24560319-36C5-4928-AB8B-FF3398C01353}"

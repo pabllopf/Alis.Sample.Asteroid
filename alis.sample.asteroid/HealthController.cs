@@ -39,6 +39,7 @@ namespace Alis.Sample.Asteroid
 {
     public class HealthController : AComponent
     {
+        
         public FontManager fontManager;
 
         public int health = 1;

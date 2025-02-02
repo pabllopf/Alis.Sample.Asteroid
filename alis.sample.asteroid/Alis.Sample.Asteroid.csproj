@@ -18,14 +18,12 @@
         </ItemGroup>
     
     <PropertyGroup Condition="$(Configuration) == 'Debug'">
-        <PublishAot>true</PublishAot> <!-- Habilitar AOT -->
         <Optimize>true</Optimize>
         <PublishTrimmed>true</PublishTrimmed>
         <TrimUnusedDependencies>true</TrimUnusedDependencies>
     </PropertyGroup>
 
     <PropertyGroup Condition="$(Configuration) == 'Release'">
-        <PublishAot>true</PublishAot> <!-- Habilitar AOT -->
         <Optimize>true</Optimize>
         <PublishReadyToRun>false</PublishReadyToRun>
         <SelfContained>true</SelfContained>

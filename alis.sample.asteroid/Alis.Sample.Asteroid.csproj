@@ -17,6 +17,7 @@
         <PackageReference Include="Alis" Version="*" />
     </ItemGroup>
 
+    
     <PropertyGroup Condition="$(Configuration) == 'Release'">
         <Optimize>true</Optimize>
         <PublishSingleFile>true</PublishSingleFile>

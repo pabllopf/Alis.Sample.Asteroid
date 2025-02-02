@@ -11,10 +11,10 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest, macos-latest, windows-latest]
-        arch: [x64, arm64, x86]
+        arch: [x64, arm64] # Eliminado x86 para Linux y macOS
         exclude:
           - os: windows-latest
-            arch: arm64  # Windows no soporta arm64 en GitHub Actions
+            arch: arm64  # Windows no soporta ARM64 en GitHub Actions
 
     steps:
       - name: Checkout repository

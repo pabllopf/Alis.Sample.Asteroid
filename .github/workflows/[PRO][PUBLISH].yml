@@ -29,12 +29,14 @@ jobs:
 
       - name: Determine Runtime Identifier
         id: runtime
+        shell: bash
         run: |
           case "${{ runner.os }}" in
             Linux)  echo "RID=linux-${{ matrix.arch }}" >> $GITHUB_ENV ;;
             macOS)  echo "RID=osx-${{ matrix.arch }}" >> $GITHUB_ENV ;;
             Windows) echo "RID=win-${{ matrix.arch }}" >> $GITHUB_ENV ;;
           esac
+
 
       - name: Publish application
         run: dotnet publish -c Release -f net8.0 -r ${{ env.RID }} --self-contained true -o ./.build/${{ env.RID }}/

@@ -1,3 +1,5 @@
+name: Build and Release
+
 on:
   push:
     branches: [master]
@@ -11,10 +13,10 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest, macos-latest, windows-latest]
-        arch: [x64, arm64] # Eliminado x86 para Linux y macOS
+        arch: [x64, arm64]
         exclude:
           - os: windows-latest
-            arch: arm64  # Windows no soporta ARM64 en GitHub Actions
+            arch: arm64
 
     steps:
       - name: Checkout repository
@@ -27,6 +29,12 @@ jobs:
         with:
           dotnet-version: 8.0.x
 
+      - name: Install dependencies (Linux)
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt update
+          sudo apt install -y clang lld
+
       - name: Determine Runtime Identifier
         id: runtime
         shell: bash
@@ -37,9 +45,11 @@ jobs:
             Windows) echo "RID=win-${{ matrix.arch }}" >> $GITHUB_ENV ;;
           esac
 
-
       - name: Publish application
-        run: dotnet publish -c Release -f net8.0 -r ${{ env.RID }} --self-contained true -o ./.build/${{ env.RID }}/
+        run: |
+          dotnet publish -c Release -f net8.0 -r ${{ env.RID }} --self-contained true \
+          -p:UseLLDLinker=true \
+          -o ./.build/${{ env.RID }}/
 
       - name: Package application (Linux/macOS)
         if: runner.os != 'Windows'
@@ -58,6 +68,7 @@ jobs:
   release:
     needs: build
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -113,4 +124,4 @@ jobs:
           tag_name: "v${{ env.NEW_VERSION }}"
           name: "Release v${{ env.NEW_VERSION }}"
           body: "🚀 New release v${{ env.NEW_VERSION }} available!"
-          files: ./artifacts/**/* 
+          files: ./artifacts/**/*

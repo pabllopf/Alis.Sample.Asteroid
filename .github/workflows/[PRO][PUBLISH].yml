@@ -47,9 +47,7 @@ jobs:
 
       - name: Publish application
         run: |
-          dotnet publish -c Release -f net8.0 -r ${{ env.RID }} --self-contained true \
-          -p:UseLLDLinker=true \
-          -o ./.build/${{ env.RID }}/
+          dotnet publish -c Release -f net8.0 -r ${{ env.RID }} --self-contained true -p:UseLLDLinker=true -o ./.build/${{ env.RID }}/
 
       - name: Package application (Linux/macOS)
         if: runner.os != 'Windows'

@@ -1,26 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Project Sdk="Microsoft.NET.Sdk">
-    <PropertyGroup>
-        <OutputType>Exe</OutputType>
-        <TargetFramework>net8.0</TargetFramework>
+    <Project Sdk="Microsoft.NET.Sdk">
+        <PropertyGroup>
+            <OutputType>Exe</OutputType>
+            <TargetFramework>net8.0</TargetFramework>
+        </PropertyGroup>
+    
+        <ItemGroup>
+            <None Condition="Exists('$(ProjectDir)/Assets/') == True"
+                  Update="$(ProjectDir)/Assets/**"
+                  LinkBase="Assets/"
+                  CopyToOutputDirectory="Always"
+                  CopyToPublishDirectory="Always"/>
+        </ItemGroup>
+    
+        <ItemGroup>
+            <PackageReference Include="Alis" Version="*" />
+        </ItemGroup>
+    
+    <PropertyGroup Condition="$(Configuration) == 'Debug'">
+        <PublishAot>true</PublishAot> <!-- Habilitar AOT -->
+        <Optimize>true</Optimize>
+        <PublishTrimmed>true</PublishTrimmed>
+        <TrimUnusedDependencies>true</TrimUnusedDependencies>
     </PropertyGroup>
 
-    <ItemGroup>
-        <None Condition="Exists('$(ProjectDir)/Assets/') == True"
-              Update="$(ProjectDir)/Assets/**"
-              LinkBase="Assets/"
-              CopyToOutputDirectory="Always"
-              CopyToPublishDirectory="Always"/>
-    </ItemGroup>
-
-    <ItemGroup>
-        <PackageReference Include="Alis" Version="*" />
-    </ItemGroup>
-    
     <PropertyGroup Condition="$(Configuration) == 'Release'">
+        <PublishAot>true</PublishAot> <!-- Habilitar AOT -->
         <Optimize>true</Optimize>
-        <PublishSingleFile>true</PublishSingleFile>
-        <PublishReadyToRun>true</PublishReadyToRun>
+        <PublishReadyToRun>false</PublishReadyToRun>
         <SelfContained>true</SelfContained>
         <OptimizationPreference>Size</OptimizationPreference>
         <StackTraceSupport>false</StackTraceSupport>
@@ -28,5 +35,8 @@
         <IncludeNativeLibrariesForSelfExtract>false</IncludeNativeLibrariesForSelfExtract>
         <DebugType>none</DebugType>
         <EnableUnsafeBinaryFormatterSerialization>false</EnableUnsafeBinaryFormatterSerialization>
+        <TrimUnusedDependencies>true</TrimUnusedDependencies>
+        <PublishTrimmed>true</PublishTrimmed>
+        <UseSystemResourceKeys>true</UseSystemResourceKeys>
     </PropertyGroup>
 </Project>

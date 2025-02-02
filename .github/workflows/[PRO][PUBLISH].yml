@@ -48,6 +48,8 @@ jobs:
       - name: Publish application
         run: |
           dotnet publish -c Release -f net8.0 -r ${{ env.RID }} --self-contained true -p:UseLLDLinker=true -o ./.build/${{ env.RID }}/
+        env:
+          DOTNET_CLI_TELEMETRY_OPTOUT: 1
 
       - name: Package application (Linux/macOS)
         if: runner.os != 'Windows'

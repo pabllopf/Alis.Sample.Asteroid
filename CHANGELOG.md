@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [v0.0.3] - 2025-02-02
+### :bug: Bug Fixes
+- [`1135ff5`](https://github.com/pabllopf/Alis.Sample.Asteroid/commit/1135ff5ab71cdbdf69ad78d36e20c8c88a5853db) - size dlls *(commit by [@pabllopf](https://github.com/pabllopf))*
+- [`ca85156`](https://github.com/pabllopf/Alis.Sample.Asteroid/commit/ca85156d18d4515f97989f1a2612d1b66c16a326) - csproj *(commit by [@pabllopf](https://github.com/pabllopf))*
+
+
 ## [v0.0.2] - 2025-02-02
 ### :bug: Bug Fixes
 - [`45d12aa`](https://github.com/pabllopf/Alis.Sample.Asteroid/commit/45d12aa7efb00a49ab07ae214492e768d0f4ad49) - trim mode Update [PRO][PUBLISH].yml *(commit by [@pabllopf](https://github.com/pabllopf))*
@@ -15,3 +21,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 [v0.0.1]: https://github.com/pabllopf/Alis.Sample.Flappy.Bird/compare/v0.0.0...v0.0.1
 [v0.0.2]: https://github.com/pabllopf/Alis.Sample.Asteroid/compare/v0.0.1...v0.0.2
+[v0.0.3]: https://github.com/pabllopf/Alis.Sample.Asteroid/compare/v0.0.2...v0.0.3

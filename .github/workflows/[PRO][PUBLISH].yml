@@ -49,8 +49,8 @@ jobs:
         if: runner.os == 'Windows'
         run: Compress-Archive -Path ./.build/${{ env.RID }}/* -DestinationPath ./.build/${{ env.APP_NAME }}_${{ env.RID }}.zip
 
-      - name: Upload artifact
-        uses: actions/upload-artifact@v3
+      - name: Upload 
+        uses: actions/upload-@v4
         with:
           name: ${{ env.APP_NAME }}_${{ env.RID }}
           path: ./.build/${{ env.APP_NAME }}_${{ env.RID }}.zip
@@ -101,8 +101,8 @@ jobs:
           git tag -s "v${{ env.NEW_VERSION }}" -m "Release v${{ env.NEW_VERSION }}"
           git push origin "v${{ env.NEW_VERSION }}"
 
-      - name: Download artifacts
-        uses: actions/download-artifact@v4
+      - name: Download s
+        uses: actions/download-@v4
         with:
           path: ./artifacts
 
@@ -113,4 +113,4 @@ jobs:
           tag_name: "v${{ env.NEW_VERSION }}"
           name: "Release v${{ env.NEW_VERSION }}"
           body: "🚀 New release v${{ env.NEW_VERSION }} available!"
-          files: ./artifacts/**/*
+          files: ./s/**/*

@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [v0.0.6] - 2025-02-02
+### :bug: Bug Fixes
+- [`1047cfe`](https://github.com/pabllopf/Alis.Sample.Asteroid/commit/1047cfe4bb340adbed0b6d045d45af6ccc154715) - build trim *(commit by [@pabllopf](https://github.com/pabllopf))*
+
+
 ## [v0.0.5] - 2025-02-02
 ### :bug: Bug Fixes
 - [`2431a4c`](https://github.com/pabllopf/Alis.Sample.Asteroid/commit/2431a4c598c51b53f3d3770fa5c279ba96d0a9ae) - new version of alis *(commit by [@pabllopf](https://github.com/pabllopf))*
@@ -35,3 +40,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [v0.0.3]: https://github.com/pabllopf/Alis.Sample.Asteroid/compare/v0.0.2...v0.0.3
 [v0.0.4]: https://github.com/pabllopf/Alis.Sample.Asteroid/compare/v0.0.3...v0.0.4
 [v0.0.5]: https://github.com/pabllopf/Alis.Sample.Asteroid/compare/v0.0.4...v0.0.5
+[v0.0.6]: https://github.com/pabllopf/Alis.Sample.Asteroid/compare/v0.0.5...v0.0.6

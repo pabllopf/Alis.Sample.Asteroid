@@ -48,7 +48,6 @@ namespace Alis.Sample.Asteroid
         /// <param name="args">The args</param>
         public static void Main(string[] args)
         {
-            
             VideoGame
                 .Create()
                 .Settings(setting => setting
@@ -57,16 +56,11 @@ namespace Alis.Sample.Asteroid
                         .Author("Pablo Perdomo Falcón")
                         .Description("Asteroids game")
                         .License("GNU General Public License v3.0")
-                        .Icon("app.bmp")
+                        .Icon("app.jpeg")
                         .Build())
                     .Audio(audio => audio
                         .Build())
                     .Graphic(graphic => graphic
-                        .Window(window => window
-                            .IsResizable(false)
-                            .Resolution(1024, 640)
-                            .Background(Color.Black)
-                            .Build())
                         .FrameRate(60)
                         .Build())
                     .Physic(physic => physic
@@ -138,7 +132,7 @@ namespace Alis.Sample.Asteroid
                                 .Rotation(0)
                                 .Build())
                             .AddComponent<Sprite>(sprite => sprite.Builder()
-                                .SetTexture("player.bmp")
+                                .SetTexture("player.jpeg")
                                 .Depth(1)
                                 .Build())
                             .AddComponent<AudioSource>(audioSource => audioSource
@@ -190,7 +184,7 @@ namespace Alis.Sample.Asteroid
                                 .Rotation(0)
                                 .Build())
                             .AddComponent<Sprite>(sprite => sprite.Builder()
-                                .SetTexture("asteroid_0.bmp")
+                                .SetTexture("asteroid_0.jpeg")
                                 .Depth(1)
                                 .Build())
                             .AddComponent(new Asteroid())
@@ -221,7 +215,7 @@ namespace Alis.Sample.Asteroid
                                 .Rotation(0)
                                 .Build())
                             .AddComponent<Sprite>(sprite => sprite.Builder()
-                                .SetTexture("asteroid_0.bmp")
+                                .SetTexture("asteroid_0.jpeg")
                                 .Depth(1)
                                 .Build())
                             .AddComponent(new Asteroid())

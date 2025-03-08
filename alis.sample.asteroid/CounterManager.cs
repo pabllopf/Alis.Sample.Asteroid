@@ -1,4 +1,4 @@
-﻿// --------------------------------------------------------------------------
+// --------------------------------------------------------------------------
 // 
 //                               █▀▀█ ░█─── ▀█▀ ░█▀▀▀█
 //                              ░█▄▄█ ░█─── ░█─ ─▀▀▀▄▄
@@ -34,17 +34,33 @@ using Alis.Core.Ecs.System.Manager.Fonts;
 
 namespace Alis.Sample.Asteroid
 {
+    /// <summary>
+    /// The counter manager class
+    /// </summary>
+    /// <seealso cref="AComponent"/>
     public class CounterManager : AComponent
     {
+        /// <summary>
+        /// The counter
+        /// </summary>
         public int counter = 10;
-        public FontManager fontManager;
+        /// <summary>
+        /// The font manager
+        /// </summary>
+        //public FontManager fontManager;
 
+        /// <summary>
+        /// Ons the start
+        /// </summary>
         public override void OnStart()
         {
-            fontManager = Context.GraphicManager.FontManager;
-            fontManager.LoadFont("MONO", 16, AssetManager.Find("mono.bmp"));
+            //fontManager = Context.GraphicManager.FontManager;
+            //fontManager.LoadFont("MONO", 16, AssetManager.Find("mono.bmp"));
         }
         
+        /// <summary>
+        /// Ons the update
+        /// </summary>
         public override void OnUpdate()
         {
         }
@@ -56,7 +72,7 @@ namespace Alis.Sample.Asteroid
         {
             if(this.Context.SceneManager.CurrentScene.GetByTag("HealthController").Get<HealthController>().health > 0)
             {
-                fontManager.RenderText("MONO", counter.ToString("D3"), -10, -10, Color.White, 32);
+                //fontManager.RenderText("MONO", counter.ToString("D3"), -10, -10, Color.White, 32);
             }
         }
         
@@ -68,6 +84,9 @@ namespace Alis.Sample.Asteroid
             counter += 10;
         }
         
+        /// <summary>
+        /// Decrements this instance
+        /// </summary>
         public void Decrement()
         {
             counter -= 1;

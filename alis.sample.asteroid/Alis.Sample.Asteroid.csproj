@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
     <Project Sdk="Microsoft.NET.Sdk">
-        <PropertyGroup>
-            <OutputType>WinExe</OutputType>
-            <TargetFramework>net9.0</TargetFramework>
-        </PropertyGroup>
+    <PropertyGroup>
+        <OutputType>WinExe</OutputType>
+        <TargetFramework>net9.0</TargetFramework>
+    </PropertyGroup>
+
+    <PropertyGroup>
+        <ApplicationIcon>Config/app.ico</ApplicationIcon>
+    </PropertyGroup>
     
         <ItemGroup>
             <PackageReference Include="Alis" Version="0.8.0" />

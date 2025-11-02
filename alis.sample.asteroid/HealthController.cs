@@ -27,22 +27,18 @@
 // 
 //  --------------------------------------------------------------------------
 
-using System;
-using Alis.Core.Aspect.Data.Mapping;
-using Alis.Core.Aspect.Data.Resource;
-using Alis.Core.Aspect.Math.Definition;
-using Alis.Core.Ecs.Component;
-using Alis.Core.Ecs.Component.Audio;
-using Alis.Core.Ecs.System.Manager.Fonts;
+
+using Alis.Core.Aspect.Fluent.Components;
 
 namespace Alis.Sample.Asteroid
 {
     /// <summary>
     /// The health controller class
     /// </summary>
-    /// <seealso cref="AComponent"/>
-    public class HealthController : AComponent
+    
+    public class HealthController : IOnInit, IOnUpdate
     {
+        /*
         /// <summary>
         /// The font manager
         /// </summary>
@@ -129,6 +125,24 @@ namespace Alis.Sample.Asteroid
         public void Decrement()
         {
             health--;
+        }*/
+
+        /// <summary>
+        /// Ons the init using the specified self
+        /// </summary>
+        /// <param name="self">The self</param>
+        public void OnInit(IGameObject self)
+        {
+            
+        }
+
+        /// <summary>
+        /// Ons the update using the specified self
+        /// </summary>
+        /// <param name="self">The self</param>
+        public void OnUpdate(IGameObject self)
+        {
+          
         }
     }
 }

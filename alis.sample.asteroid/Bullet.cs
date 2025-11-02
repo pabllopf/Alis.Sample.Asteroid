@@ -27,32 +27,38 @@
 // 
 //  --------------------------------------------------------------------------
 
-using Alis.Core.Ecs.Component;
-using Alis.Core.Ecs.Entity;
+using Alis.Core.Aspect.Fluent.Components;
+using Alis.Core.Aspect.Fluent.Words;
+using Alis.Core.Aspect.Logging;
+using Alis.Core.Ecs.Components;
+using Alis.Core.Ecs.Systems.Scope;
 
 namespace Alis.Sample.Asteroid
 {
     /// <summary>
     /// The bullet class
     /// </summary>
-    /// <seealso cref="AComponent"/>
-    public class Bullet : AComponent
+    public struct Bullet : IOnCollisionEnter
     {
         /// <summary>
-        /// Ons the collision enter using the specified game object
+        /// Ons the collision enter using the specified other
         /// </summary>
-        /// <param name="gameObject">The game object</param>
-        public override void OnCollisionEnter(GameObject gameObject)
+        /// <param name="other">The other</param>
+        public void OnCollisionEnter(IGameObject other)
         {
+            ref Info gameObject = ref other.Get<Info>();
+            
             if (gameObject.Tag == "Asteroid")
             {
-                gameObject.Get<Asteroid>().DecreaseHealth();
-                this.GameObject.Context.SceneManager.DestroyGameObject(this.GameObject);
+                Logger.Info("Bullet hit an asteroid and will decrease its health.");
+                other.Get<Asteroid>().DecreaseHealth();
+                //Context.SceneManager.CurrentWorld.(this.GameObject);
             }
             
             if (gameObject.Tag == "Wall")
             {
-                this.GameObject.Context.SceneManager.DestroyGameObject(this.GameObject);
+                Logger.Info("Bullet hit a wall and will be destroyed.");
+                //this.GameObject.Context.SceneManager.DestroyGameObject(this.GameObject);
             }
         }
     }

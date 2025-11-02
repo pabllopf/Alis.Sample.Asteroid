@@ -28,13 +28,11 @@
 //  --------------------------------------------------------------------------
 
 using System;
+using Alis.Core.Aspect.Fluent.Components;
 using Alis.Core.Aspect.Math;
 using Alis.Core.Aspect.Math.Vector;
-using Alis.Core.Ecs.Component;
-using Alis.Core.Ecs.Component.Audio;
-using Alis.Core.Ecs.Component.Collider;
-using Alis.Core.Ecs.Component.Render;
-using Alis.Core.Ecs.Entity;
+using Alis.Core.Ecs;
+using Alis.Core.Ecs.Systems.Scope;
 using Alis.Core.Physic.Dynamics;
 
 namespace Alis.Sample.Asteroid
@@ -42,9 +40,10 @@ namespace Alis.Sample.Asteroid
     /// <summary>
     /// The asteroid class
     /// </summary>
-    /// <seealso cref="AComponent"/>
-    public class Asteroid : AComponent
+    
+    public class Asteroid : IOnInit, IOnUpdate
     {
+        /*
         /// <summary>
         /// The rb
         /// </summary>
@@ -232,6 +231,33 @@ namespace Alis.Sample.Asteroid
         {
             health -= 1;
             Console.WriteLine("Asteroid health: " + health);
+        }*/
+        
+        /// <summary>
+        /// Decreases the health
+        /// </summary>
+        public void DecreaseHealth()
+        {
+            //health -= 1;
+            //Console.WriteLine("Asteroid health: " + health);
+        }
+
+        /// <summary>
+        /// Ons the init using the specified self
+        /// </summary>
+        /// <param name="self">The self</param>
+        public void OnInit(IGameObject self)
+        {
+                
+        }
+
+        /// <summary>
+        /// Ons the update using the specified self
+        /// </summary>
+        /// <param name="self">The self</param>
+        public void OnUpdate(IGameObject self)
+        {
+          
         }
     }
 }

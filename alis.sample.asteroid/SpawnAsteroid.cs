@@ -27,30 +27,33 @@
 // 
 //  --------------------------------------------------------------------------
 
-using Alis.Core.Ecs.Component;
+
+using Alis.Core.Aspect.Fluent.Components;
 
 namespace Alis.Sample.Asteroid
 {
     /// <summary>
     /// The spawn asteroid class
     /// </summary>
-    /// <seealso cref="AComponent"/>
-    public class SpawnAsteroid : AComponent
+    
+    public class SpawnAsteroid : IOnInit, IOnUpdate
     {
         /// <summary>
-        /// Ons the start
+        /// Ons the init using the specified self
         /// </summary>
-        public override void OnStart()
+        /// <param name="self">The self</param>
+        public void OnInit(IGameObject self)
         {
             
         }
 
         /// <summary>
-        /// Ons the update
+        /// Ons the update using the specified self
         /// </summary>
-        public override void OnUpdate()
+        /// <param name="self">The self</param>
+        public void OnUpdate(IGameObject self)
         {
-            
+           
         }
     }
 }

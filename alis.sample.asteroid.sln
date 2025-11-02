@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.33516.290
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".Config", ".Config", "{D4B64FBA-B22F-497E-84B0-9D4FFCD107E5}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".config", ".config", "{D4B64FBA-B22F-497E-84B0-9D4FFCD107E5}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
 		.gitignore = .gitignore
@@ -16,6 +16,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".Config", ".Config", "{D4B6
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alis.Sample.Asteroid", "alis.sample.asteroid\Alis.Sample.Asteroid.csproj", "{24560319-36C5-4928-AB8B-FF3398C01353}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{A7A8D615-5D20-49B1-A3D7-EC45908B2112}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{DF9C42C0-74DA-418C-90A9-17A60A1B8886}"
+	ProjectSection(SolutionItems) = preProject
+		.github\workflows\[PRO][CHECK][ISSUES].yml = .github\workflows\[PRO][CHECK][ISSUES].yml
+		.github\workflows\[PRO][DEPENDENCY][REVIEW].yml = .github\workflows\[PRO][DEPENDENCY][REVIEW].yml
+		.github\workflows\[PRO][PUBLISH].yml = .github\workflows\[PRO][PUBLISH].yml
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -44,6 +53,7 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
+		{DF9C42C0-74DA-418C-90A9-17A60A1B8886} = {A7A8D615-5D20-49B1-A3D7-EC45908B2112}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8C491FC8-E9B0-4689-BAA5-ED6F7C5F61A5}

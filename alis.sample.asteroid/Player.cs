@@ -1,25 +1,47 @@
-using Alis.Core.Aspect.Data.Mapping;
-using Alis.Core.Aspect.Math;
+
+using System;
+using Alis.Builder.Core.Ecs.Components.Collider;
+using Alis.Builder.Core.Ecs.Components.Render;
+using Alis.Core.Aspect.Fluent;
+using Alis.Core.Aspect.Fluent.Components;
+using Alis.Core.Aspect.Fluent.Words;
 using Alis.Core.Aspect.Math.Vector;
-using Alis.Core.Ecs.Component;
-using Alis.Core.Ecs.Component.Audio;
-using Alis.Core.Ecs.Component.Collider;
-using Alis.Core.Ecs.Component.Render;
-using Alis.Core.Ecs.Entity;
+using Alis.Core.Ecs;
+using Alis.Core.Ecs.Components;
+using Alis.Core.Ecs.Components.Audio;
+using Alis.Core.Ecs.Components.Collider;
+using Alis.Core.Ecs.Components.Render;
+using Alis.Core.Ecs.Systems.Scope;
 using Alis.Core.Physic.Dynamics;
 
 namespace Alis.Sample.Asteroid
 {
     /// <summary>
-    /// The player movement class
+    /// The player class
     /// </summary>
-    /// <seealso cref="AComponent"/>
-    public class Player : AComponent
+    /// <seealso cref="IOnStart"/>
+    /// <seealso cref="IOnUpdate"/>
+    /// <seealso cref="IOnReleaseKey"/>
+    /// <seealso cref="IOnPressKey"/>
+    /// <seealso cref="IOnHoldKey"/>
+    /// <seealso cref="IHasContext{Context}"/>
+    public class Player : IOnStart, IOnUpdate, IOnReleaseKey, IOnPressKey, IOnHoldKey, IHasContext<Context>
     {
+        
         /// <summary>
         /// The box collider
         /// </summary>
         private BoxCollider boxCollider;
+        
+        /// <summary>
+        /// The audio source
+        /// </summary>
+        private AudioSource audioSource;
+        
+        /// <summary>
+        /// The game object
+        /// </summary>
+        private IGameObject gameObject;
         
         /// <summary>
         /// The vector
@@ -34,16 +56,18 @@ namespace Alis.Sample.Asteroid
         /// <summary>
         /// Ons the start
         /// </summary>
-        public override void OnStart()
+        public void OnStart(IGameObject self)
         {
-            boxCollider = this.GameObject.Get<BoxCollider>();
+            boxCollider = self.Get<BoxCollider>();
+            audioSource = self.Get<AudioSource>();
+            gameObject = self;
         }
         
         
         /// <summary>
         /// Ons the update
         /// </summary>
-        public override void OnUpdate()
+        public void OnUpdate(IGameObject self)
         {
             float targetRotationDegrees = CalculateRotationInDegrees(direction.X, direction.Y);
             boxCollider.Body.Rotation = targetRotationDegrees;
@@ -124,65 +148,33 @@ namespace Alis.Sample.Asteroid
         /// Ons the press down key using the specified key
         /// </summary>
         /// <param name="key">The key</param>
-        public override void OnPressDownKey(Keys key)
+        public void OnPressKey(KeyEventInfo info)
         {
-            if (key == Keys.D)
+            ConsoleKey key = info.Key;
+            if (key == ConsoleKey.Spacebar && (direction.X != 0 || direction.Y != 0))
             {
-                direction.X = 1;
-            }
-
-            if (key == Keys.A)
-            {
-                direction.X = -1;
-            }
-
-            if (key == Keys.W)
-            {
-                direction.Y = 1;
-            }
-
-            if (key == Keys.S)
-            {
-                direction.Y = -1;
-            }
-
-            if (key == Keys.A || key == Keys.D || key == Keys.W || key == Keys.S)
-            {
-                this.boxCollider.Body.ApplyForce(direction * acceleration);
-            }
-
-        }
-
-        /// <summary>
-        /// Ons the press key using the specified key
-        /// </summary>
-        /// <param name="key">The key</param>
-        public override void OnPressKey(Keys key)
-        {
-            if (key == Keys.Space && (direction.X != 0 || direction.Y != 0))
-            {
-                this.GameObject.Get<AudioSource>().Play();
-                this.Context.SceneManager.CurrentScene.GetByTag("Points").Get<CounterManager>().Decrement();
+                audioSource.Play();
+                //this.Context.SceneManager.CurrentScene.GetByTag("Points").Get<CounterManager>().Decrement();
                 
                 
-                GameObject bullet = new GameObject();
-                bullet.Name = $"Bullet_{Context.TimeManager.FrameCount}";
+                
+                //bullet.Name = $"Bullet_{Context.TimeManager.FrameCount}";
         
-                Transform transform = bullet.Transform;
-                transform.Position = this.GameObject.Transform.Position; // Set the bullet's initial position to the player's position
-                transform.Scale = new Vector2F(0.25f, 0.25f);
-                bullet.Transform = transform;
-        
-                bullet.Add(new Sprite().Builder()
-                    .SetTexture("asteroid_0.jpeg")
+                Transform transform = gameObject.Get<Transform>();
+                Transform t = new Transform();
+                t.Position = new Vector2F(transform.Position.X, transform.Position.Y);
+                t.Scale = new Vector2F(1, 1);
+                
+                Sprite s = new SpriteBuilder(Context)
+                    .SetTexture("asteroid_0.bmp")
                     .Depth(1)
-                    .Build());
+                    .Build();
+                
                 
                 int bulletSpeed = 5;
                 Vector2F velo = new Vector2F(direction.X * bulletSpeed, direction.Y * bulletSpeed);
-                
-                bullet.Add(new BoxCollider()
-                    .Builder()
+
+                BoxCollider box = new BoxColliderBuilder(Context)
                     .IsActive(true)
                     .BodyType(BodyType.Dynamic)
                     .IsTrigger(true)
@@ -196,20 +188,66 @@ namespace Alis.Sample.Asteroid
                     .Friction(0f)
                     .FixedRotation(true)
                     .IgnoreGravity(true)
-                    .Build());
+                    .Build();
                 
-                bullet.Add(new Bullet());
+                var bullet = Context.SceneManager.CurrentWorld.Create<Transform, Sprite, BoxCollider, Bullet>(t, s, box, new Bullet());
                 
-                Context.SceneManager.CurrentScene.Add(bullet);
+                
+                box.Context = this.Context;
+                s.Context = this.Context;
+                
+                box.OnStart(bullet);
+                s.OnStart(bullet);
+                
+                
             }
         }
 
         /// <summary>
-        /// Ons the release key using the specified key
+        /// Ons the release key using the specified info
         /// </summary>
-        /// <param name="key">The key</param>
-        public override void OnReleaseKey(Keys key)
+        /// <param name="info">The info</param>
+        public void OnReleaseKey(KeyEventInfo info)
         {
+            
         }
+
+        /// <summary>
+        /// Ons the hold key using the specified info
+        /// </summary>
+        /// <param name="info">The info</param>
+        public void OnHoldKey(KeyEventInfo info)
+        {
+            ConsoleKey key = info.Key;
+            if (key == ConsoleKey.D)
+            {
+                direction.X = 1;
+            }
+
+            if (key == ConsoleKey.A)
+            {
+                direction.X = -1;
+            }
+
+            if (key == ConsoleKey.W)
+            {
+                direction.Y = 1;
+            }
+
+            if (key == ConsoleKey.S)
+            {
+                direction.Y = -1;
+            }
+
+            if (key == ConsoleKey.A || key == ConsoleKey.D || key == ConsoleKey.W || key == ConsoleKey.S)
+            {
+                this.boxCollider.Body.ApplyForce(direction * acceleration);
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the value of the context
+        /// </summary>
+        public Context Context { get; set; }
     }
 }

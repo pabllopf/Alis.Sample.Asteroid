@@ -6,6 +6,11 @@
     </PropertyGroup>
 
     <PropertyGroup>
+        <DefineConstants Condition="'$(RuntimeIdentifier)' != ''">$(DefineConstants);$([System.String]::Copy('$(RuntimeIdentifier)').Replace('-',''));</DefineConstants>
+        <DefineConstants Condition="'$(RuntimeIdentifier)' == ''" >$([System.String]::Copy('$(NETCoreSdkRuntimeIdentifier)').Replace('-',''));</DefineConstants>
+    </PropertyGroup>
+    
+    <PropertyGroup>
         <ApplicationIcon>Config/app.ico</ApplicationIcon>
     </PropertyGroup>
     

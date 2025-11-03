@@ -10,7 +10,7 @@
     </PropertyGroup>
     
         <ItemGroup>
-            <PackageReference Include="Alis" Version="0.8.0" />
+            <PackageReference Include="Alis" Version="*" />
         </ItemGroup>
 
     <!-- Target to create the .app bundle on macOS after publish -->
